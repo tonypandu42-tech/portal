@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Portal</title>
+
+    <style>
+        body {
+            background-color: #e8f0fe;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .box {
+            background-color: white;
+            width: 450px;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 7px 0;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0d5ec7;
+        }
+
+        .remove {
+            background-color: #dc3545;
+        }
+
+        .remove:hover {
+            background-color: #b02a37;
+        }
+
+        .student {
+            background-color: #f5f7fa;
+            margin: 15px 0;
+            padding: 15px;
+            text-align: left;
+            border-radius: 8px;
+            border-left: 5px solid #1a73e8;
+        }
+
+        .student b {
+            color: #1a3c70;
+        }
+
+        h1, h2 {
+            color: #1a3c70;
+        }
+
+        #addStudent {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Faculty Login -->
+    <div class="box" id="login">
+
+        <h1>University Portal</h1>
+        <h2>Faculty Login</h2>
+
+        Faculty Name:<br>
+        <input type="text" id="facultyName"><br>
+
+        Mobile Number:<br>
+        <input type="text" id="mobile"><br>
+
+        Password:<br>
+        <input type="password" id="password"><br><br>
+
+        <button onclick="login()">Login</button>
+
+    </div>
+
+
+    <!-- Student List -->
+    <div class="box" id="studentData" style="display:none;">
+
+        <h2>Student Information</h2>
+
+        <div id="studentList">
+
+            <div class="student">
+                <b>Name:</b> Rahul Patel<br>
+                <b>Roll Number:</b> 101<br>
+                <b>Course:</b> B.Tech Computer Engineering<br>
+                <b>Semester:</b> 5th<br>
+                <b>Marks:</b> 85%<br>
+
+                <button class="remove" onclick="removeStudent(this)">
+                    Remove Student
+                </button>
+            </div>
+
+
+            <div class="student">
+                <b>Name:</b> Priya Shah<br>
+                <b>Roll Number:</b> 102<br>
+                <b>Course:</b> B.Tech Computer Engineering<br>
+                <b>Semester:</b> 5th<br>
+                <b>Marks:</b> 91%<br>
+
+                <button class="remove" onclick="removeStudent(this)">
+                    Remove Student
+                </button>
+            </div>
+
+
+            <div class="student">
+                <b>Name:</b> Amit Joshi<br>
+                <b>Roll Number:</b> 103<br>
+                <b>Course:</b> B.Tech Computer Engineering<br>
+                <b>Semester:</b> 5th<br>
+                <b>Marks:</b> 78%<br>
+
+                <button class="remove" onclick="removeStudent(this)">
+                    Remove Student
+                </button>
+            </div>
+
+
+            <div class="student">
+                <b>Name:</b> Neha Patel<br>
+                <b>Roll Number:</b> 104<br>
+                <b>Course:</b> B.Tech Computer Engineering<br>
+                <b>Semester:</b> 5th<br>
+                <b>Marks:</b> 88%<br>
+
+                <button class="remove" onclick="removeStudent(this)">
+                    Remove Student
+                </button>
+            </div>
+
+        </div>
+
+        <button onclick="showAddStudent()">
+            + Add Student
+        </button>
+
+    </div>
+
+
+    <!-- Add Student -->
+    <div class="box" id="addStudent">
+
+        <h2>Add New Student</h2>
+
+        Student Name:<br>
+        <input type="text" id="studentName"><br>
+
+        Roll Number:<br>
+        <input type="text" id="rollNumber"><br>
+
+        Course:<br>
+        <input type="text" id="course"><br>
+
+        Semester:<br>
+        <input type="text" id="semester"><br>
+
+        Marks:<br>
+        <input type="text" id="marks"><br><br>
+
+        <button onclick="addStudent()">Add Student</button>
+
+        <button onclick="cancelAdd()">Cancel</button>
+
+    </div>
+
+
+    <script>
+
+        // Faculty Login
+        function login() {
+
+            var name = document.getElementById("facultyName").value;
+            var mobile = document.getElementById("mobile").value;
+            var password = document.getElementById("password").value;
+
+            if (name == "" || mobile == "" || password == "") {
+                alert("Please enter all login details.");
+                return;
+            }
+
+            document.getElementById("login").style.display = "none";
+
+            document.getElementById("studentData").style.display = "block";
+        }
+
+
+        // Show Add Student
+        function showAddStudent() {
+
+            document.getElementById("studentData").style.display = "none";
+
+            document.getElementById("addStudent").style.display = "block";
+        }
+
+
+        // Add Student
+        function addStudent() {
+
+            var name = document.getElementById("studentName").value;
+            var roll = document.getElementById("rollNumber").value;
+            var course = document.getElementById("course").value;
+            var semester = document.getElementById("semester").value;
+            var marks = document.getElementById("marks").value;
+
+            if (name == "" || roll == "" || course == "" ||
+                semester == "" || marks == "") {
+
+                alert("Please enter all student details.");
+                return;
+            }
+
+            var student = document.createElement("div");
+
+            student.className = "student";
+
+            student.innerHTML =
+                "<b>Name:</b> " + name + "<br>" +
+                "<b>Roll Number:</b> " + roll + "<br>" +
+                "<b>Course:</b> " + course + "<br>" +
+                "<b>Semester:</b> " + semester + "<br>" +
+                "<b>Marks:</b> " + marks + "<br>" +
+                "<button class='remove' onclick='removeStudent(this)'>" +
+                "Remove Student</button>";
+
+            document.getElementById("studentList").appendChild(student);
+
+            // Clear fields
+            document.getElementById("studentName").value = "";
+            document.getElementById("rollNumber").value = "";
+            document.getElementById("course").value = "";
+            document.getElementById("semester").value = "";
+            document.getElementById("marks").value = "";
+
+            document.getElementById("addStudent").style.display = "none";
+
+            document.getElementById("studentData").style.display = "block";
+
+            alert("Student added successfully!");
+        }
+
+
+        // Remove Student
+        function removeStudent(button) {
+
+            var confirmRemove = confirm(
+                "Are you sure you want to remove this student?"
+            );
+
+            if (confirmRemove) {
+
+                var student = button.parentElement;
+
+                student.remove();
+
+                alert("Student removed successfully!");
+            }
+        }
+
+
+        // Cancel Add Student
+        function cancelAdd() {
+
+            document.getElementById("addStudent").style.display = "none";
+
+            document.getElementById("studentData").style.display = "block";
+        }
+
+    </script>
+
+</body>
+</html>
